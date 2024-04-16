@@ -1,0 +1,59 @@
+import pygame 
+
+pygame.init() 
+pygame.display.set_caption("space invaders!") 
+gamewindow =pygame.display.set_mode((800, 800))
+grandfatherclock = pygame.time .Clock() 
+dead = False 
+#player variables 
+xpos = 400 
+ypos = 750 
+moveLeft = False
+
+while not dead: #game loop 
+    grandfatherclock.tick(60) 
+                #input section 
+    for event in pygame.event.get(): 
+        if event.type == pygame.QUIT: 
+            gameover = True
+
+        if event.type == pygame.KEYDOWN: 
+            if event.key == pygame.K_LEFT: 
+                moveLeft = True 
+            #add right key input here
+            elif event.key == pygame.K_RIGHT: 
+                moveRight = True 
+    
+        elif event.type == pygame.KEYUP: 
+            if event.key == pygame.K_RIGHT:
+                moveRight = False  
+            elif event.key == pygame.K_LEFT: 
+                moveLeft = False 
+                
+
+    #physics section 
+
+    #check variables from input section 
+    if moveLeft == True: 
+        
+        vx =-3
+    #add right movement here
+    else: 
+        vx =2
+
+    
+
+    #update player pos 
+    xpos += vx 
+
+        #render screen 
+    gamewindow.fill((0,0,0)) 
+        
+    #player ship
+    pygame.draw.rect(gamewindow, (200, 0, 100), (xpos, ypos, 60, 20)) 
+        
+    pygame.display.flip() 
+
+        # end game loop 
+
+pygame.quit() 
